@@ -14,6 +14,6 @@ class TemporaryViewConfig implements WebMvcConfigurer {
         registry.addViewController("/checkout").setViewName("checkout");
         registry.addViewController("/product-details").setViewName("product-details");
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/register").setViewName("register");
+//        registry.addViewController("/register").setViewName("register");
     }
 }

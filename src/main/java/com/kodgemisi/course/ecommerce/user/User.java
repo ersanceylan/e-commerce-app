@@ -36,7 +36,7 @@ public class User implements UserDetails {
 
     private String lastName;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     @Override
