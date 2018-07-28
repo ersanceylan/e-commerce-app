@@ -9,7 +9,7 @@ import java.util.Set;
 
 @AllArgsConstructor
 @Service
-class RegistrationService {
+public class RegistrationService {
 
     private final UserRepository userRepository;
 
@@ -32,7 +32,8 @@ class RegistrationService {
         userRepository.save(user);
     }
 
-    void createAdmin(RegistrationDto registrationDto) {
+    public void createAdmin(User user) {
+        userRepository.save(user);
     }
 
 }

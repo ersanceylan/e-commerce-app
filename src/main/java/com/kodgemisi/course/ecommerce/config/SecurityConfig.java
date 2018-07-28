@@ -36,7 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/register",
                         "/h2-console/**",
                         "/css/**",
-                        "/js/**").permitAll()
+                        "/js/**")
+                .permitAll()
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

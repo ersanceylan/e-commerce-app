@@ -9,11 +9,9 @@ class TemporaryViewConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index");
         registry.addViewController("/cart").setViewName("cart");
         registry.addViewController("/checkout").setViewName("checkout");
         registry.addViewController("/product-details").setViewName("product-details");
         registry.addViewController("/login").setViewName("login");
-//        registry.addViewController("/register").setViewName("register");
     }
 }

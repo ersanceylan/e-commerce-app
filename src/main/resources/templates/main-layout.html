@@ -73,14 +73,14 @@
                             <a class="dropdown-item" th:href="@{/register}">Register</a>
                         </th:block>
                         <th:block sec:authorize="isAuthenticated()">
-                            <a class="dropdown-item" href="#">[[${#httpServletRequest.remoteUser}]]</a>
+                            <a class="dropdown-item" href="#" sec:authentication="principal.username"></a>
+                            <a class="dropdown-item" href="#" sec:authorize="hasAuthority('ADMIN')">Admin Dashboard</a>
+                            <a class="dropdown-item" href="#">
+                                <form th:action="@{/logout}" method="POST">
+                                    <input type="submit" class="btn btn-link" value="Logout">
+                                </form>
+                            </a>
                         </th:block>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">
-                            <form th:action="@{/logout}" method="POST">
-                                <input type="submit" class="btn btn-link" value="Logout">
-                            </form>
-                        </a>
                     </div>
                 </li>
             </ul>
