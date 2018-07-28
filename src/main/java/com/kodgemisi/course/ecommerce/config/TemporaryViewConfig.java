@@ -1,4 +1,4 @@
-package com.kodgemisi.course.ecommerce;
+package com.kodgemisi.course.ecommerce.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
