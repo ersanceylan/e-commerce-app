@@ -1,7 +1,7 @@
 spring:
   jpa:
     open-in-view: false
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: update
   properties:
     hibernate:
       show_sql: true

@@ -73,7 +73,7 @@
                             <a class="dropdown-item" th:href="@{/register}">Register</a>
                         </th:block>
                         <th:block sec:authorize="isAuthenticated()">
-                            <a class="dropdown-item" href="#" sec:authentication="name"></a>
+                            <a class="dropdown-item" href="#">[[${#httpServletRequest.remoteUser}]]</a>
                         </th:block>
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="#">
