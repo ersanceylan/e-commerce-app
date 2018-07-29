@@ -1,5 +1,7 @@
 package com.kodgemisi.course.ecommerce;
 
+import com.kodgemisi.course.ecommerce.category.Category;
+import com.kodgemisi.course.ecommerce.category.CategoryService;
 import com.kodgemisi.course.ecommerce.product.Product;
 import com.kodgemisi.course.ecommerce.product.ProductService;
 import com.kodgemisi.course.ecommerce.user.*;
@@ -14,10 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.imageio.spi.RegisterableService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @SpringBootApplication
 public class EcommerceApplication {
@@ -34,6 +33,7 @@ public class EcommerceApplication {
     @Bean
     CommandLineRunner commandLineRunner(UserService userService,
                                         ProductService productService,
+                                        CategoryService categoryService,
                                         RegistrationService registrationService, RoleRepository roleRepository,
                                         PasswordEncoder passwordEncoder) {
         return args -> {
@@ -46,6 +46,13 @@ public class EcommerceApplication {
 
             roleRepository.save(Role.ADMIN);
             roleRepository.save(Role.USER);
+
+            // add categories
+            Category electronic = new Category("electronic");
+            Category clothing = new Category("clothing");
+            Category entertainment = new Category("entertainment");
+            List<Category> categoryList = Arrays.asList(electronic, clothing, entertainment);
+            categoryService.saveAll(categoryList);
 
             // Create new user
             User user = new User();
@@ -88,6 +95,7 @@ public class EcommerceApplication {
             List<Product> productList = new ArrayList<>();
             for (int i = 1; i < 61; i++) {
                 Product product = Product.builder()
+                    .category(categoryList.get(fairy.baseProducer().randomBetween(0,2)))
                     .name(fairy.textProducer().latinWord(3))
                     .description(fairy.textProducer().latinSentence(20))
                     .creationDate(LocalDate.now())

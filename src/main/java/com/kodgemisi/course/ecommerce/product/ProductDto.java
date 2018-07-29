@@ -1,27 +1,20 @@
 package com.kodgemisi.course.ecommerce.product;
 
 import com.kodgemisi.course.ecommerce.category.Category;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-@Entity
-public class Product implements Serializable {
+public class ProductDto {
 
-    @Id
-    @GeneratedValue
     private Long id;
 
     @NotBlank
@@ -40,8 +33,6 @@ public class Product implements Serializable {
     private String url;
 
     @NotNull
-    @OneToOne
-    private Category category;
+    private Long categoryId;
 
-    private LocalDate creationDate;
 }

@@ -83,11 +83,14 @@
         </a>
 
         <div class="list-group list-group-flush">
-            <a th:href="@{/admin/users}" class="list-group-item active waves-effect">
+            <a th:href="@{/admin/users}" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/users')} ? 'active'" class="list-group-item waves-effect">
                 <i class="fa fa-user mr-3"></i>Users
             </a>
-            <a th:href="@{/admin/products}" class="list-group-item waves-effect">
-                <i class="fa fa-user mr-3"></i>Products
+            <a th:href="@{/admin/products}" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/products')} ? 'active'" class="list-group-item waves-effect">
+                <i class="fa fa-folder-open mr-3"></i>Products
+            </a>
+            <a th:href="@{/admin/categories}" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/categories')} ? 'active'" class="list-group-item waves-effect">
+                <i class="fa fa-bookmark mr-3"></i>Categories
             </a>
         </div>
 

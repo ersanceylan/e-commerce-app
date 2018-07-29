@@ -39,6 +39,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
+                <th scope="col">Category</th>
                 <th scope="col">Price</th>
                 <th scope="col">Stock</th>
                 <th scope="col">Creation Date</th>
@@ -50,9 +51,10 @@
                 <th scope="row" th:text="*{id}"></th>
                 <td th:text="*{name}"></td>
                 <td th:text="*{description}"></td>
+                <td><span class="badge badge-primary" th:text="*{category.name}"></span></td>
                 <td th:text="*{price}"></td>
                 <td th:text="*{stock}"></td>
-                <td th:text="*{creationDate}"></td>
+                <td th:text="*{#temporals.format(creationDate, 'dd MMM, yyyy')}"></td>
                 <td>
                     <div class="text-center">
                         <img th:src="*{url}" class="img-thumbnail" alt="placeholder">
