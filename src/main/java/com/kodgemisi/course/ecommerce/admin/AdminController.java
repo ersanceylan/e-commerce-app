@@ -22,25 +22,4 @@ public class AdminController {
         return "admin/index";
     }
 
-    @GetMapping("/users")
-    public String manageUsers(Model model, Pageable pageable) {
-        Page<User> users = userService.findAll(pageable);
-        model.addAttribute("users", users);
-        return "admin/user/index";
-    }
-
-    @GetMapping("/users/{id}")
-    public String userDetails(Model model, @PathVariable Long id) {
-        User user = userService.findById(id);
-        model.addAttribute("user", user);
-        return "admin/user/show";
-    }
-
-    @PatchMapping("/users/{id}")
-    public String changeEnabledStatus(User user, @PathVariable("id") Long id) {
-        userService.setEnabled(id, user.isEnabled());
-        // check if this user authenticated
-        return "redirect:/admin/users/{id}";
-    }
-
 }
