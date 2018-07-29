@@ -18,7 +18,7 @@ public class RegistrationDtoValidator implements Validator {
         RegistrationDto dto = (RegistrationDto) target;
 
         if (dto.getEmail() != null && !dto.getEmail().equals(dto.getEmailConfirmation())) {
-            errors.rejectValue("emailConfirmation","user.registrationDto.emailConfirmationNotEqual", "confirmation email doesn't match");
+            errors.rejectValue("emailConfirmation","error.invalid");
         }
 
     }

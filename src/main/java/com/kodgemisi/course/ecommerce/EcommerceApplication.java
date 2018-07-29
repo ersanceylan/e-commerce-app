@@ -34,16 +34,27 @@ public class EcommerceApplication {
             }
 
             if (!userService.existsByUsername("admin")) {
-                // Create new admin
+                // Create new user
                 User user = new User();
-                user.setUsername("admin");
-                user.setEmail("admin-lyk@mailinator.com");
+                user.setUsername("user");
+                user.setEmail("user-lyk@mailinator.com");
                 user.setPassword(passwordEncoder.encode("password"));
-                user.setFirstName("Admin");
-                user.setLastName("Admin");
+                user.setFirstName("User");
+                user.setLastName("User");
                 Set<Role> roles = new HashSet<>();
-                roles.add(roleRepository.findByRoleName(Role.RoleName.ADMIN));
+                roles.add(roleRepository.findByRoleName(Role.RoleName.USER));
                 user.setRoles(roles);
+
+                // Create new admin
+                User admin = new User();
+                admin.setUsername("admin");
+                admin.setEmail("admin-lyk@mailinator.com");
+                admin.setPassword(passwordEncoder.encode("password"));
+                admin.setFirstName("Admin");
+                admin.setLastName("Admin");
+                Set<Role> adminRoles = new HashSet<>();
+                adminRoles.add(roleRepository.findByRoleName(Role.RoleName.ADMIN));
+                admin.setRoles(adminRoles);
 
                 // Create user has role both admin and user
                 User adminUser = new User();
@@ -58,6 +69,7 @@ public class EcommerceApplication {
                 adminUser.setRoles(adminUserRoles);
 
                 registrationService.createAdmin(user);
+                registrationService.createAdmin(admin);
                 registrationService.createAdmin(adminUser);
             }
         };

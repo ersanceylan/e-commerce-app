@@ -1,10 +1,12 @@
 package com.kodgemisi.course.ecommerce.user;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
+@Getter
 @Entity
 @NoArgsConstructor
 public class Role implements GrantedAuthority {
