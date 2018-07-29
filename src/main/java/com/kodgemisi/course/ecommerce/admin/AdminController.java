@@ -39,6 +39,7 @@ public class AdminController {
     @PatchMapping("/users/{id}")
     public String changeEnabledStatus(User user, @PathVariable("id") Long id) {
         userService.setEnabled(id, user.isEnabled());
+        // check if this user authenticated
         return "redirect:/admin/users/{id}";
     }
 

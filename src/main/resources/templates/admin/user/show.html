@@ -51,6 +51,9 @@
                       th:text="${role.authority}"></span>
             </p>
         </div>
+        <div class="d-flex justify-content-center">
+            <p class="card-text my-2" style="max-width: 43rem;" th:if="${!user.enabled}"><em>This account is disabled</em></p>
+        </div>
 
         <hr class="my-4 rgba-white-light">
 
