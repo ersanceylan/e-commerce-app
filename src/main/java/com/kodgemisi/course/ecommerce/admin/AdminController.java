@@ -3,12 +3,8 @@ package com.kodgemisi.course.ecommerce.admin;
 import com.kodgemisi.course.ecommerce.category.Category;
 import com.kodgemisi.course.ecommerce.category.CategoryService;
 import com.kodgemisi.course.ecommerce.category.CategoryValidator;
-import com.kodgemisi.course.ecommerce.user.User;
-import com.kodgemisi.course.ecommerce.user.UserService;
+import com.kodgemisi.course.ecommerce.product.ProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +23,8 @@ public class AdminController {
     private final CategoryService categoryService;
 
     private final CategoryValidator categoryValidator;
+
+    private final ProductService productService;
 
     @InitBinder
     void addCategoryValidator(WebDataBinder binder) {
@@ -60,6 +58,12 @@ public class AdminController {
     public String deleteCategory(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         categoryService.delete(id);
         redirectAttributes.addFlashAttribute("successMessage", "Successfully created");
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/products/{id}/disable")
+    public String disableProduct(@PathVariable Long id) {
+        productService.setEnabledStatus(id);
         return "redirect:/admin";
     }
 
