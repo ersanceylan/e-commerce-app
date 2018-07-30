@@ -2,6 +2,7 @@ package com.kodgemisi.course.ecommerce.admin;
 
 import com.kodgemisi.course.ecommerce.category.Category;
 import com.kodgemisi.course.ecommerce.category.CategoryService;
+import com.kodgemisi.course.ecommerce.category.CategoryValidator;
 import com.kodgemisi.course.ecommerce.user.User;
 import com.kodgemisi.course.ecommerce.user.UserService;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +25,13 @@ import java.util.List;
 public class AdminController {
 
     private final CategoryService categoryService;
+
+    private final CategoryValidator categoryValidator;
+
+    @InitBinder
+    void addCategoryValidator(WebDataBinder binder) {
+        binder.addValidators(this.categoryValidator);
+    }
 
     @GetMapping
     public String adminDashboard(Model model) {
@@ -38,9 +47,19 @@ public class AdminController {
 
         if (!bindingResult.hasErrors()) {
             categoryService.save(category);
-            redirectAttributes.addFlashAttribute("message", "Successfully created");
+            redirectAttributes.addFlashAttribute("successMessage", "Successfully created");
+        }
+        else {
+            redirectAttributes.addFlashAttribute("errorMessage", bindingResult.getFieldError("name").getDefaultMessage());
         }
 
+        return "redirect:/admin";
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public String deleteCategory(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        categoryService.delete(id);
+        redirectAttributes.addFlashAttribute("successMessage", "Successfully created");
         return "redirect:/admin";
     }
 

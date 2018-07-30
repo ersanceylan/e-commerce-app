@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -19,6 +20,7 @@ public class Category implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @NotBlank
     @Column(unique = true)
     private String name;
 

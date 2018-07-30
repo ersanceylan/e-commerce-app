@@ -36,6 +36,10 @@ public class CategoryService {
         });
     }
 
+    public void delete(Long id) {
+        categoryRepository.deleteById(id);
+    }
+
     public boolean existsByName(String name) {
         return categoryRepository.existsByName(name);
     }
