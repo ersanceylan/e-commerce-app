@@ -34,6 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/",
                         "/register",
+                        "/products/**",
+                        "/cart/**",
                         "/h2-console/**",
                         "/css/**",
                         "/js/**")

@@ -50,9 +50,10 @@
 
                         <p th:text="*{description}"></p>
 
-                        <form class="d-flex justify-content-left">
+                        <form th:action="@{/cart/new}" th:method="POST" class="d-flex justify-content-left">
                             <!-- Default input -->
-                            <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+                            <input type="hidden" th:value="*{id}" name="productId" class="form-control" style="width: 100px">
+                            <input type="number" value="1" name="count" class="form-control" style="width: 100px">
                             <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
                                 <i class="fa fa-shopping-cart ml-1"></i>
                             </button>

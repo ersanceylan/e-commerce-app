@@ -56,14 +56,14 @@
 
             <!-- Right -->
             <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect" th:href="@{/cart}">
+                        <span class="badge red z-depth-1 mr-1" th:if="${!#lists.isEmpty(session.cart)}" th:text="${#lists.size(session.cart)}"></span>
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="clearfix d-none d-sm-inline-block">Cart</span>
+                    </a>
+                </li>
                 <th:block sec:authorize="!isAuthenticated()">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" th:href="@{/cart}">
-                            <span class="badge red z-depth-1 mr-1"></span>
-                            <i class="fa fa-shopping-cart"></i>
-                            <span class="clearfix d-none d-sm-inline-block"> Cart </span>
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link waves-effect" th:href="@{/register}" th:text="Register"></a>
                     </li>
