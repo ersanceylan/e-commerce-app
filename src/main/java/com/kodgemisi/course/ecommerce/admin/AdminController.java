@@ -61,8 +61,8 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/products/{id}/disable")
-    public String disableProduct(@PathVariable Long id) {
+    @PatchMapping("/products/{id}/changeEnableStatus")
+    public String changeProductEnableStatus(@PathVariable Long id) {
         productService.setEnabledStatus(id);
         return "redirect:/admin";
     }

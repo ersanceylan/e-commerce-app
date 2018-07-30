@@ -61,7 +61,7 @@
                     </div>
                 </td>
                 <td>
-                    <form th:action="@{/admin/products/__*{id}__/disable}" th:method="POST">
+                    <form th:action="@{/admin/products/__*{id}__/changeEnableStatus}" th:method="PATCH">
                     <button th:text="*{enabled == true} ? 'Disable' : 'Enable'" type="submit" class="btn btn-sm btn-light-blue">Disable</button>
                     </form>
                 </td>

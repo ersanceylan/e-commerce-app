@@ -28,7 +28,7 @@ public class ProductService {
     }
 
     public Page<Product> findAllByEnabledTrue(Pageable pageable) {
-        return productRepository.findByEnabledTrue(pageable);
+        return productRepository.findByEnabled(pageable, true);
     }
 
     public void saveAll(List<Product> productList) {
