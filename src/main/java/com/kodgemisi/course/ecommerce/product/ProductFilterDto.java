@@ -15,6 +15,6 @@ class ProductFilterDto {
 
     private BigDecimal maxPrice;
 
-//    private String categoryName;
+    private String categoryName;
 
 }

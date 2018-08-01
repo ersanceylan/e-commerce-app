@@ -14,14 +14,14 @@ public class ProductSpecificationBuilder {
         params = new ArrayList<ProductFilterCriteria>();
     }
 
-    public ProductSpecificationBuilder with(String key, String operation, Object value) {
-        if (value != null) {
+    ProductSpecificationBuilder with(String key, String operation, Object value) {
+        if (value != null && !value.toString().equals("")) {
             params.add(new ProductFilterCriteria(key, operation, value));
         }
         return this;
     }
 
-    public Specification<Product> build() {
+    Specification<Product> build() {
         if (params.size() == 0) {
             return null;
         }

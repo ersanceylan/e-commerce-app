@@ -19,7 +19,15 @@ public class ProductSpecification implements Specification<Product> {
     public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 
         if (criteria.getOperation().equals("=")) {
-            return criteriaBuilder.like(root.get(criteria.getKey()), "%" + criteria.getValue().toString() + "%");
+
+            if (criteria.getKey().contains(".")) {
+                String[] columns = criteria.getKey().split("\\.");
+                return criteriaBuilder.equal(root.join(columns[0]).get(columns[1]), criteria.getValue().toString());
+            }
+            else {
+                return criteriaBuilder.like(root.get(criteria.getKey()), "%" + criteria.getValue().toString() + "%");
+            }
+
         }
         else if (criteria.getOperation().equals(">")) {
             return criteriaBuilder.greaterThanOrEqualTo(root.get(criteria.getKey()), criteria.getValue().toString());

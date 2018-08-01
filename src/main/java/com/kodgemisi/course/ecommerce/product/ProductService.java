@@ -32,10 +32,11 @@ public class ProductService {
 
         ProductSpecificationBuilder builder = new ProductSpecificationBuilder();
 
-        builder.with("name", "=", productFilterDto.getKeyword());
 //        builder.with("description", "=", productFilterDto.getKeyword());
+        builder.with("name", "=", productFilterDto.getKeyword());
         builder.with("price", ">", productFilterDto.getMinPrice());
         builder.with("price", "<", productFilterDto.getMaxPrice());
+        builder.with("category.name", "=", productFilterDto.getCategoryName());
 
         Specification<Product> specification = builder.build();
 
