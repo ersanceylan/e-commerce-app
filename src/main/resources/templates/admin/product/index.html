@@ -61,7 +61,9 @@
                     </div>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-light-blue">Small</button>
+                    <form th:action="@{/admin/products/__*{id}__/changeEnableStatus}" th:method="PATCH">
+                    <button th:text="*{enabled == true} ? 'Disable' : 'Enable'" type="submit" class="btn btn-sm btn-light-blue">Disable</button>
+                    </form>
                 </td>
             </tr>
         </tbody>

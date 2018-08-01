@@ -39,6 +39,8 @@ public class Product implements Serializable {
     @Pattern(regexp = "^http.*")
     private String url;
 
+    private boolean enabled = true;
+
     @NotNull
     @OneToOne
     private Category category;

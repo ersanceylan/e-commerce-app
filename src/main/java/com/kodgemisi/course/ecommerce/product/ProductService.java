@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,6 +25,10 @@ public class ProductService {
 
     public Page<Product> findAll(Pageable pageable) {
         return productRepository.findAll(pageable);
+    }
+
+    public Page<Product> findAllByEnabledTrue(Pageable pageable) {
+        return productRepository.findByEnabled(pageable, true);
     }
 
     public void saveAll(List<Product> productList) {
@@ -50,11 +55,17 @@ public class ProductService {
     }
 
     public Product findById(Long id) {
-        Optional<Product> optionalProduct = productRepository.findById(id);
+        Optional<Product> optionalProduct = productRepository.findByIdAndEnabledTrue(id);
         return optionalProduct.orElseThrow(() -> {
             log.error("product not found by id: {}", id);
             return new ResourceNotFoundException();
         });
+    }
+
+    @Transactional
+    public void  setEnabledStatus(Long id) {
+        Product product = this.findById(id);
+        product.setEnabled(!product.isEnabled());
     }
 
 }

@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -103,6 +104,7 @@ public class EcommerceApplication {
                     .price(BigDecimal.valueOf(fairy.baseProducer().randomBetween(300, 1000)))
                     .url("https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/"+((i%15) + 1)+".jpg")
                     .build();
+                product.setEnabled(true);
                 productList.add(product);
             }
             productService.saveAll(productList);
