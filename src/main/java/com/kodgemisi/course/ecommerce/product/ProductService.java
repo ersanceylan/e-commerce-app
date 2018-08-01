@@ -7,8 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +27,20 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     private final CategoryService categoryService;
+
+    Page<Product> filter(Pageable pageable, ProductFilterDto productFilterDto) {
+
+        ProductSpecificationBuilder builder = new ProductSpecificationBuilder();
+
+        builder.with("name", "=", productFilterDto.getKeyword());
+//        builder.with("description", "=", productFilterDto.getKeyword());
+        builder.with("price", ">", productFilterDto.getMinPrice());
+        builder.with("price", "<", productFilterDto.getMaxPrice());
+
+        Specification<Product> specification = builder.build();
+
+        return productRepository.findAll(specification, pageable);
+    }
 
     public Page<Product> findAll(Pageable pageable) {
         return productRepository.findAll(pageable);
