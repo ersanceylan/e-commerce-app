@@ -27,12 +27,15 @@ class BuyingService {
     }
 
     Buying createNewBuying(User user, Set<SellingProduct> sellingProducts, PaymentType paymentType) {
+
+        // implement payment info
+
         Buying buying = new Buying(user, sellingProducts, paymentType);
         this.save(buying);
         return buying;
     }
 
-    Set<SellingProduct> createSellingProducts(List<CartItem> items) {
+    Set<SellingProduct> createSellingProducts(List<CartItem> items) throws ProductOutOfStockException {
         return items.stream().map(item -> {
             Product product = productService.findById(item.getProductId());
             if (product.getStock() < item.getCount()) {

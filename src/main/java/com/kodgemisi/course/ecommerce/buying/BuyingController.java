@@ -52,19 +52,11 @@ public class BuyingController {
     }
 
     @PostMapping
-    String proceedPayment(@AuthenticationPrincipal User user, Model model, @Valid PaymentInfo paymentInfo, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
-        // payment details
+    String proceedPayment(@AuthenticationPrincipal User user, Model model,
+                          @Valid PaymentInfo paymentInfo, BindingResult bindingResult,
+                          RedirectAttributes redirectAttributes) {
 
         List<CartItem> cartItems = cartService.getAllItems();
-        Set<SellingProduct> sellingProducts = new HashSet<>();
-        // todo: handle exception
-        try {
-            sellingProducts = buyingService.createSellingProducts(cartItems);
-        } catch (ProductOutOfStockException e) {
-            redirectAttributes.addFlashAttribute("productOutOfStockMessage", "There are less of that product in the stock");
-            return "redirect:/";
-        }
 
         if (bindingResult.hasErrors()) {
             BigDecimal total = BigDecimal.valueOf(0);
@@ -75,6 +67,15 @@ public class BuyingController {
             model.addAttribute("cartItems", cartItems);
             model.addAttribute("cartTotal", total);
             return "buying/checkout";
+        }
+
+        Set<SellingProduct> sellingProducts = new HashSet<>();
+        // todo: handle exception
+        try {
+            sellingProducts = buyingService.createSellingProducts(cartItems);
+        } catch (ProductOutOfStockException e) {
+            redirectAttributes.addFlashAttribute("productOutOfStockMessage", "There are less of that product in the stock");
+            return "redirect:/";
         }
 
         Buying buying = buyingService.createNewBuying(user, sellingProducts, PaymentType.CREDIT_CARD);
