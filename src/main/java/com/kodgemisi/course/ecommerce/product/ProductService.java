@@ -1,5 +1,6 @@
 package com.kodgemisi.course.ecommerce.product;
 
+import com.kodgemisi.course.ecommerce.buying.SellingProduct;
 import com.kodgemisi.course.ecommerce.category.Category;
 import com.kodgemisi.course.ecommerce.category.CategoryService;
 import com.kodgemisi.course.ecommerce.exceptions.ResourceNotFoundException;
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @AllArgsConstructor
@@ -75,6 +77,14 @@ public class ProductService {
         return optionalProduct.orElseThrow(() -> {
             log.error("product not found by id: {}", id);
             return new ResourceNotFoundException();
+        });
+    }
+
+    public void updateStockCounts(Set<SellingProduct> sellingProducts) {
+        sellingProducts.forEach(sellingProduct -> {
+            Product product = sellingProduct.getProduct();
+            product.setStock(product.getStock() - sellingProduct.getCount());
+            productRepository.save(product);
         });
     }
 
