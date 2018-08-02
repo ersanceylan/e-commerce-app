@@ -23,7 +23,7 @@
                     <div class="card">
 
                         <!--Card content-->
-                        <form th:action="@{/buy}" th:method="POST" class="card-body">
+                        <form th:action="@{/buy}" th:method="POST" th:object="${paymentInfo}" class="card-body">
 
                             <!--Grid row-->
                             <div class="row">
@@ -33,8 +33,9 @@
 
                                     <!--firstName-->
                                     <div class="md-form ">
-                                        <input type="text" id="firstName" class="form-control">
+                                        <input type="text" th:field="*{firstName}" id="firstName" th:errorclass="is-invalid" class="form-control">
                                         <label for="firstName" class="">First name</label>
+                                        <div class="invalid-feedback" th:errors="*{firstName}"></div>
                                     </div>
 
                                 </div>
@@ -45,8 +46,9 @@
 
                                     <!--lastName-->
                                     <div class="md-form">
-                                        <input type="text" id="lastName" class="form-control">
+                                        <input type="text" th:field=*{lastName}  th:errorclass="is-invalid" id="lastName" class="form-control">
                                         <label for="lastName" class="">Last name</label>
+                                        <div class="invalid-feedback" th:errors="*{lastName}"></div>
                                     </div>
 
                                 </div>
@@ -65,19 +67,28 @@
 
                             <!--email-->
                             <div class="md-form mb-5">
-                                <input type="text" id="email" class="form-control" placeholder="youremail@example.com">
+                                <input type="text" th:field="*{email}" id="email" th:errorclass="is-invalid" class="form-control">
                                 <label for="email" class="">Email (optional)</label>
+                                <div class="invalid-feedback" th:errors="*{email}"></div>
+                            </div>
+
+                            <!--phone-->
+                            <div class="md-form mb-5">
+                                <input type="text" th:field="*{phone}" th:errorclass="is-invalid" id="phone" class="form-control">
+                                <label for="phone" class="">Phone</label>
+                                <div class="invalid-feedback" th:errors="*{phone}"></div>
                             </div>
 
                             <!--address-->
                             <div class="md-form mb-5">
-                                <input type="text" id="address" class="form-control" placeholder="1234 Main St">
+                                <input type="text" th:field="*{address}" id="address" th:errorclass="is-invalid" class="form-control">
                                 <label for="address" class="">Address</label>
+                                <div class="invalid-feedback" th:errors="*{address}"></div>
                             </div>
 
                             <!--address-2-->
                             <div class="md-form mb-5">
-                                <input type="text" id="address-2" class="form-control" placeholder="Apartment or suite">
+                                <input type="text" id="address-2" class="form-control">
                                 <label for="address-2" class="">Address 2 (optional)</label>
                             </div>
 
@@ -161,16 +172,11 @@
                                     <label for="cc-name">Name on card</label>
                                     <input type="text" class="form-control" id="cc-name" placeholder="" >
                                     <small class="text-muted">Full name as displayed on card</small>
-                                    <div class="invalid-feedback">
-                                        Name on card is
-                                    </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="cc-number">Credit card number</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" >
-                                    <div class="invalid-feedback">
-                                        Credit card number is
-                                    </div>
+                                    <input type="text" th:field=*{creditCard} th:errorclass="is-invalid" class="form-control" id="cc-number" >
+                                    <div class="invalid-feedback" th:errors="*{creditCard}"></div>
                                 </div>
                             </div>
                             <div class="row">

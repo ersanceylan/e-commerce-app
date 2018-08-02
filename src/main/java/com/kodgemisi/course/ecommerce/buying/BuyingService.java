@@ -1,6 +1,7 @@
 package com.kodgemisi.course.ecommerce.buying;
 
 import com.kodgemisi.course.ecommerce.cart.CartItem;
+import com.kodgemisi.course.ecommerce.exceptions.ProductOutOfStockException;
 import com.kodgemisi.course.ecommerce.product.Product;
 import com.kodgemisi.course.ecommerce.product.ProductService;
 import com.kodgemisi.course.ecommerce.user.User;
@@ -36,6 +37,7 @@ class BuyingService {
             Product product = productService.findById(item.getProductId());
             if (product.getStock() < item.getCount()) {
                 // todo: throw new Exception
+                throw new ProductOutOfStockException();
             }
             SellingProduct selling = new SellingProduct(item.getCount(), product);
             sellingProductRepository.save(selling);
