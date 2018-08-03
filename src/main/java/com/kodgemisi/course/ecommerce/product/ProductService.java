@@ -89,5 +89,14 @@ public class ProductService {
         });
     }
 
+    public int addStock(Product product, int count) throws Exception {
+        if (count < 0) {
+            throw new Exception();
+        }
+        int currentStockCount = product.getStock();
+        currentStockCount += count;
+        product.setStock(currentStockCount);
+        return product.getStock();
+    }
 
 }
