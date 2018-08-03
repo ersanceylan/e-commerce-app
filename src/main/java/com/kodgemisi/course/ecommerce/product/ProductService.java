@@ -5,6 +5,7 @@ import com.kodgemisi.course.ecommerce.category.Category;
 import com.kodgemisi.course.ecommerce.category.CategoryService;
 import com.kodgemisi.course.ecommerce.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -87,5 +88,6 @@ public class ProductService {
             productRepository.save(product);
         });
     }
+
 
 }
