@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    url: jdbc:h2:~/development/apps/db/e-commerce-app
